@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EndeavourOS + Hyprland checklist</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:640px;margin:0 auto;padding:16px;line-height:1.5;background:#fff;color:#111}
+@media(prefers-color-scheme:dark){body{background:#111;color:#eee}code,pre{background:#222!important}.warn{background:#3a2a00!important}}
+h1{font-size:1.4em}h2{font-size:1.15em;margin-top:1.6em;border-bottom:1px solid #8884}
+label{display:block;margin:.5em 0}
+code,pre{background:#eee;padding:2px 5px;border-radius:4px}pre{padding:10px;overflow-x:auto}
+.warn{background:#fff3cd;border-left:4px solid #e6a700;padding:8px 12px;margin:1em 0}
+</style></head><body>
+<h1>EndeavourOS + Hyprland on the SanDisk</h1>
+<p>Tick the boxes as you go. <b>Cruzer</b> = installer stick (E:). <b>SanDisk 3.2</b> = where Linux goes (about 28.7 GB). <b>Windows drive</b> = about 954 GB, never touch it.</p>
+
+<h2>Part 1: Boot the installer</h2>
+<label><input type="checkbox"> Both sticks plugged in (Cruzer and SanDisk). Laptop plugged into power.</label>
+<label><input type="checkbox"> Restart and tap <b>F12</b> repeatedly to open the boot menu.</label>
+<label><input type="checkbox"> Pick the <b>Cruzer</b> (may show as "USB" or "UEFI: SanDisk Cruzer").</label>
+<label><input type="checkbox"> In the EndeavourOS menu, choose the first option. Wait for the live desktop.</label>
+<label><input type="checkbox"> Connect to Wi-Fi (bottom-right corner). The online install needs internet.</label>
+<div class="warn">If it boots straight into Windows, restart and try F12 again, or pick the USB entry that says UEFI.</div>
+
+<h2>Part 2: Run the installer</h2>
+<label><input type="checkbox"> In the Welcome window click <b>Start the Installer</b>, then choose <b>Online</b>.</label>
+<label><input type="checkbox"> Language, location, keyboard: set yours.</label>
+<label><input type="checkbox"> Desktop: pick <b>Hyprland</b> if listed. If not, pick <b>KDE Plasma</b> as a safe base (Caelestia adds Hyprland later).</label>
+<label><input type="checkbox"> Partitions: choose <b>Erase disk</b>.</label>
+<label><input type="checkbox"> <b>IMPORTANT:</b> in the drive dropdown at the top, select the <b>~28.7 GB SanDisk</b>. NOT the 954 GB drive, NOT the Cruzer.</label>
+<label><input type="checkbox"> File system <b>ext4</b>. Swap: none or swap to file. No encryption for now.</label>
+<label><input type="checkbox"> Set your name, username, password. Remember the password.</label>
+<label><input type="checkbox"> Check the summary page shows the 28.7 GB disk, then click Install and wait (can take 20 to 30 minutes).</label>
+<div class="warn">If the summary shows the 954 GB drive, STOP and go back. That is your Windows drive.</div>
+
+<h2>Part 3: First boot from the SanDisk</h2>
+<label><input type="checkbox"> When finished, choose Shutdown (not restart).</label>
+<label><input type="checkbox"> <b>Unplug the Cruzer.</b> Leave only the SanDisk in.</label>
+<label><input type="checkbox"> Power on, tap <b>F12</b>, pick the SanDisk (look for "EndeavourOS" or the SanDisk name).</label>
+<label><input type="checkbox"> Log in. Connect to Wi-Fi.</label>
+<label><input type="checkbox">  Safety check: later, restart with the SanDisk unplugged and confirm Windows still starts normally.</label>
+
+<h2>Part 4: Install Caelestia (the Hyprland look)</h2>
+<p>Open a terminal (Konsole on KDE, or press <code>Super + Enter</code> in Hyprland). Run these one at a time:</p>
+<pre>sudo pacman -Syu</pre>
+<pre>sudo pacman -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ttf-jetbrains-mono-nerd git base-devel</pre>
+<pre>paru -S caelestia-cli</pre>
+<pre>caelestia install</pre>
+<p>EndeavourOS includes <code>yay</code>. If <code>paru</code> is not found, run <code>yay -S caelestia-cli</code> instead.</p>
+<label><input type="checkbox"> Log out, then at the login screen choose the <b>Hyprland</b> session (button or dropdown near the password box) and log in.</label>
+<div class="warn">If there is no Hyprland session in the list, or the screen is blank, switch to a text console with Ctrl+Alt+F3, log in, and run <code>Hyprland</code> to see any error message. Take a photo of the error.</div>
+
+<h2>Caelestia keys</h2>
+<ul>
+<li><b>Super</b> (Windows key), press and release: launcher</li>
+<li><b>Super + N</b>: sidebar</li>
+<li><b>Super + K</b>: show all panels</li>
+<li><b>Ctrl + Alt + Delete</b>: session menu (log out, shut down)</li>
+<li>Update later with <code>caelestia update</code></li>
+<li>Do not edit files in <code>~/.config/hypr/</code>. Put your changes in <code>~/.config/caelestia/hypr-vars.lua</code> and <code>hypr-user.lua</code>.</li>
+</ul>
+
+<h2>If something goes wrong</h2>
+<ul>
+<li>Installer fails or freezes: the SanDisk is the only thing it touches. Reboot the Cruzer and retry.</li>
+<li>Nothing breaks Windows as long as you picked the 28.7 GB disk.</li>
+<li>Take phone photos of any error, reboot Windows, and send them to Claude.</li>
+<li>Caelestia install commands can change. If a step fails, check github.com/caelestia-dots/caelestia for the current steps.</li>
+</ul>
+</body></html>
